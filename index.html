@@ -1,12 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="./border.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kdlm</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a; /* Dunkles Grau */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .container {
+            background: #2c2c2c; /* Etwas helleres Grau für den Container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            color: #bbb; /* Helleres Grau für den Text */
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .btn {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50%;
+            padding: 10px;
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+            background-color: #007bff; /* Blue color on hover */
+            border-color: #007bff; /* Border color change to blue */
+        }
+        .btn svg {
+            fill: white;
+            width: 24px;
+            height: 24px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-left: 5px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: dotAnimation 1.5s infinite;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes dotAnimation {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        .container p:hover {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.5), 0 0 24px rgba(255, 255, 255, 0.3);
+            transition: text-shadow 0.3s ease;
+        }
+        /* Media Queries für mobile Geräte */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em; /* Kleinere Schriftgröße für kleinere Bildschirme */
+            }
+            p {
+                font-size: 1em;
+            }
+            .container {
+                padding: 10px; /* Weniger Padding auf kleineren Bildschirmen */
+            }
+            .buttons {
+                gap: 10px; /* Weniger Abstand zwischen den Buttons */
+            }
+            .btn {
+                width: 40px;
+                height: 40px;
+                padding: 8px; /* Kleinere Buttons für kleinere Bildschirme */
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
+<canvas id="backgroundCanvas"></canvas>
+<div class="container">
 
     <h1 class="fade-in">Work in Progress<span class="dot"></span><span class="dot"></span><span class="dot"></span></h1>
     <p class="fade-in">Kiyan do Lago Martins</p>
@@ -22,7 +149,7 @@
                 <text x="12" y="20" font-size="20" font-family="Arial, sans-serif" text-anchor="middle" fill="black">in</text>
             </svg>
         </a>
-        <a href="mailto:contact@kdlm.de" class="btn">
+        <a href="mailto:kiyandolagomartins@icloud.com" class="btn">
             <!-- @ Zeichen -->
             <text x="12" y="20" font-size="25" font-family="Arial, sans-serif" text-anchor="middle" fill="black">@</text>
         </a>
@@ -33,75 +160,97 @@
     const canvas = document.getElementById("backgroundCanvas");
     const ctx = canvas.getContext("2d");
 
-    </nav>
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    <main>
-        <table>
-            <thead>
-            <tr>
-                <th>Zeit</th>
-                <th>Dienstag</th>
-                <th>Mittwoch</th>
-                <th>Donnerstag</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>12:00</td>
-                <td colspan="3">Önder</td>
-            </tr>
-            <tr>
-                <td>13:00</td>
-                <td>Mia</td>
-                <td rowspan="2" colspan="2">peter</td>
-            </tr>
-            <tr>
-                <td>14:00</td>
-                <td rowspan="2">John</td>
-            </tr>
-            <tr>
-                <td>15:00</td>
-                <td>Alice</td>
-                <td>Hakim</td>
-            </tr>
-            </tbody>
-        </table>
-        <form method="post">
-            <fieldset>
-                <legend>Angaben</legend>
-                <label>Email <input name="mailAddr" type="email"></label>
-                <br>
-                <label>
-                    Themen
-                    <select name="topics" multiple size="3" >
-                        <option value="Geocaching">Geocaching</option>
-                        <option value="Bouldern">Bouldern</option>
-                        <option value="Sport Stacking">Sport Stacking</option>
-                    </select>
+    // Neuronale Netzwerk-Punkte und Linien
+    const points = [];
+    const lines = [];
 
-                </label>
-            </fieldset>
+    // Erstelle Punkte zufällig
+    function createPoints() {
+        for (let i = 0; i < 50; i++) {
+            points.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5, // Geschwindigkeit in x-Richtung verringern
+                vy: (Math.random() - 0.5) * 0.5  // Geschwindigkeit in y-Richtung verringern
+            });
+        }
+    }
 
-            <label>
-                <input type="radio" name="action" value="sub" checked>
-                abbonieren
-            </label>
-            <label>
-                <input type="radio" name="action" value="unsub">
-                abbestellen
-            </label>
-            <br>
-            <button type="submit">Daten absenden</button>
-        </form>
-    </main>
+    // Linien zwischen den Punkten
+    function createLines() {
+        lines.length = 0;
+        for (let i = 0; i < points.length; i++) {
+            for (let j = i + 1; j < points.length; j++) {
+                const p1 = points[i];
+                const p2 = points[j];
+                const distance = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+                if (distance < 150) {
+                    lines.push({ p1, p2, distance });
+                }
+            }
+        }
+    }
 
-    <aside>
+    // Zeichne alles auf das Canvas
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    </aside>
+        // Zeichne Linien
+        lines.forEach(line => {
+            ctx.beginPath();
+            ctx.moveTo(line.p1.x, line.p1.y);
+            ctx.lineTo(line.p2.x, line.p2.y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - line.distance / 150})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        });
 
-    <footer>
+        // Zeichne Punkte
+        points.forEach(point => {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            ctx.fill();
+        });
 
-    </footer>
+        // Punkte bewegen
+        points.forEach(point => {
+            point.x += point.vx;
+            point.y += point.vy;
 
+            // Wände reflektieren
+            if (point.x < 0 || point.x > canvas.width) point.vx *= -1;
+            if (point.y < 0 || point.y > canvas.height) point.vy *= -1;
+        });
+
+        // Linien nach Punkten erstellen
+        createLines();
+    }
+
+    // Animationsloop
+    function animate() {
+        draw();
+        requestAnimationFrame(animate);
+    }
+
+    // Initialisierung
+    createPoints();
+    animate();
+
+    // Fade-In Effekt für den Text
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".fade-in").forEach(element => {
+            element.style.opacity = 0;
+            element.style.transition = "opacity 2s ease-in-out";
+            setTimeout(() => {
+                element.style.opacity = 1;
+            }, 500);
+        });
+    });
+
+</script>
 </body>
 </html>
